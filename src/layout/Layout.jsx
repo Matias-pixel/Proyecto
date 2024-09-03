@@ -1,20 +1,22 @@
 import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Tooltip, Navbar } from 'flowbite-react';
+import { NavbarComponents } from '../components/Navbar';
+import Hero from '../components/Hero';
 
 export const Layout = () => {
     const navigate = useNavigate();
 
     return (
         <>
-            <Navbar fluid rounded className="flex z-50 fixed w-full top-0 left-0 bg-[#1E1D3E] ">
+            {/* <Navbar fluid rounded className="flex z-50 fixed w-full top-0 left-0 bg-[#1E1D3E] "> */}
                 {/* <Navbar.Brand>
                     <Tooltip content="Menú">
                         
                     </Tooltip>
                 </Navbar.Brand> */}
 
-                <Navbar.Collapse className="flex justify-center">
+                {/* <Navbar.Collapse className="flex justify-center">
                     <Navbar.Link as={Link} to="/home" className="mx-4">
                         <Tooltip content="Inicio">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-8 h-8">
@@ -31,11 +33,13 @@ export const Layout = () => {
 
                         </Tooltip>
                     </Navbar.Link>
-                </Navbar.Collapse>
+                </Navbar.Collapse> */}
 
 
 
-            </Navbar>
+            {/* </Navbar> */}
+            <NavbarComponents />
+            
 
             <div className='flex pt-20'> {/* Ajustar el padding-top para que coincida con la nueva altura del Navbar */}
                 <main className='flex-grow ml-0 md:ml-56 mt-0 pl-5'>

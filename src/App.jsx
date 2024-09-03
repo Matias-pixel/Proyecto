@@ -16,11 +16,11 @@ const App = () => {
 
         <Route path="/" element={<Login />} errorElement={< NotFound />} />
         <Route path="/login" element={<Login />} errorElement={< NotFound />} />
+        <Route path="/home" element= {<Home />} errorElement={< NotFound />}/>
         
-        <Route path="/home" element={<Layout /> } errorElement={<NotFound />}>
+        {/* <Route path="/home" element={<Layout /> } errorElement={<NotFound />}>
           <Route path="/home/" element={<Home />} errorElement={< NotFound />} index/>
-          
-        </Route>
+        </Route> */}
 
       </Routes>
     </Router>
