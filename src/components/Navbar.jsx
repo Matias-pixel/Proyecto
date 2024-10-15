@@ -5,16 +5,17 @@ import {
   RiMenu3Fill,
   RiCloseLine,
 } from "react-icons/ri";
+import { PiRecycle } from "react-icons/pi";
 
 export const NavbarComponents = () => {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <header className="flex items-center justify-between xl:justify-start w-full py-4 px-8 h-[8vh] z-50 bg-green-600">
       <div className="xl:w-1/6 text-center -mt-4">
-        <a href="#" className="text-2xl text-pink-50 font-bold relative p-1">
-          ExedentX<span className="text-primary text-5xl">.</span>{" "}
-          <RiCheckboxBlankCircleFill className="absolute -left-3 -bottom-3 text-primary -z-10" />
-        </a>
+        <a href="#" className=" flex text-2xl text-pink-50 font-bold relative p-3 pt-5">
+          ExedentX<span className="pt-4 text-sm"><PiRecycle /></span>{" "}
+          
+        </a> 
       </div>
       <nav
         className={`fixed bg-green-600 w-[80%] md:w-[40%] xl:w-full h-full ${showMenu ? "left-0" : "-left-full"} top-0 xl:static flex-1 flex flex-col xl:flex-row items-center justify-center xl:justify-between gap-10 transition-all duration-500 z-50`}
