@@ -42,7 +42,7 @@ export const ModalNewCategory = ({ isOpen, onClose }) => {
             Swal.fire({
                 icon: "error",
                 title: "Error!",
-                text: "Hubo un error al tratar de crear al administrador."
+                text: "Hubo un error al tratar de crear la categoria."
             });
         }
 
@@ -52,9 +52,9 @@ export const ModalNewCategory = ({ isOpen, onClose }) => {
 
     const resetForm = () => {
         setFormState({
-            names: '',
-            lastnames: '',
-            email: '',
+            name: '',
+            active: true,
+       
 
         });
     };

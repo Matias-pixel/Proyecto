@@ -8,13 +8,18 @@ import { Link, Outlet } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { CustomDrawerMenu } from "./CustomDrawerMenu";
 
 export const LayoutAdmin = () => {
   const { dispatch } = useContext(AuthContext);
   const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
+
+
+  const [isOpenMenu, setIsOpenMenu] = useState();
+
+  const handleLogout = async () => {
+
     try {
       dispatch({ type: "LOGOUT" });
       await axios.post('http://localhost:3000/accesos/auth/clientes/logout');
@@ -42,6 +47,7 @@ export const LayoutAdmin = () => {
           {/* Mostrar el Dropdown solo en pantallas pequeñas */}
 
           <Tooltip content='Menú' >
+
             <Dropdown
               arrowIcon={false}
               inline
@@ -75,10 +81,10 @@ export const LayoutAdmin = () => {
                   <HiShieldExclamation className="text-gray-500 w-6 h-6 mb-1" />
                   <span className="text-sm text-gray-700 dark:text-gray-400">Administradores</span>
                 </a>
-                <button className="hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md p-2 flex flex-col items-center text-center" onClick={handleLogout}>
+                <div className="hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md p-2 flex flex-col items-center text-center" onClick={handleLogout}>
                   <HiOutlineLogout className="text-gray-500 w-6 h-6 mb-1" />
                   <span className="text-sm text-gray-700 dark:text-gray-400">Cerrar sesión</span>
-                </button>
+                </div>
               </div>
 
             </Dropdown>
@@ -86,9 +92,9 @@ export const LayoutAdmin = () => {
 
 
           {/* Tooltip para usuario */}
+          <div className="hidden sm:block">
 
-          <Tooltip content='Menú'>
-            <Dropdown arrowIcon={false} inline label={<Avatar img={'/svg.svg'} className="hidden sm:block" alt="User settings" rounded />}>
+            <Dropdown arrowIcon={false} inline label={<Avatar img={'/svg.svg'} className="hidden sm:block" alt="User settings" rounded />} >
               <Dropdown.Header>
                 <span className="block text-sm">{user.cliente.names} {user.cliente.lastnames}</span>
                 <span className="block truncate text-sm font-medium">{user.cliente.email}</span>
@@ -96,12 +102,15 @@ export const LayoutAdmin = () => {
               <Dropdown.Item as={Link} to={'/homeAdmin/'}>Inicio</Dropdown.Item>
               <Dropdown.Item>Mi cuenta</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item onClick={handleLogout}>Cerrar sesión</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout} >Cerrar Sesión</Dropdown.Item>
             </Dropdown>
-          </Tooltip>
+            <p className="text-sm font-semibold text-pink-50">Menú</p>
+          </div>
+
 
 
         </nav>
+        {isOpenMenu && <CustomDrawerMenu closeDrawer={() => setIsOpenMenu(false)} /> }
       </header>
 
       <div className="flex h-[92vh]">
@@ -119,8 +128,12 @@ export const LayoutAdmin = () => {
                 Productos
               </Sidebar.Item>
               <Sidebar.Item as={Link} to="/homeAdmin/verCategorias" icon={HiOutlineClipboardList}>
-                Categoria
+                Categorias
               </Sidebar.Item>
+              <Sidebar.Item as={Link} to="/homeAdmin/verEstados" icon={HiOutlineClipboardList}>
+                Estados
+              </Sidebar.Item>
+
               <Sidebar.Item as={Link} to="/homeAdmin/verClientes" icon={HiUsers}>
                 Clientes
               </Sidebar.Item>

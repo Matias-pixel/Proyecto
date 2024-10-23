@@ -5,10 +5,13 @@ import axios from "axios";
 export const ModalNewProduct = ({ isOpen, onClose }) => {
 
     const [categorias, setCategorias] = useState([])
+
+    const [estados, setEstados] = useState([])
     // Estados para los inputs
     const [formState, setFormState] = useState({
         name: '',
         category: '',
+        estado: '',
         brand: '',
         price: '',
         details: '',
@@ -17,7 +20,7 @@ export const ModalNewProduct = ({ isOpen, onClose }) => {
         file: null,
     });
 
-    const { name, category, brand, price, details, total, file } = formState;
+    const { name, category, brand, price, details, total, file, estado } = formState;
 
     const resetForm = () => {
         setFormState({
@@ -28,6 +31,8 @@ export const ModalNewProduct = ({ isOpen, onClose }) => {
             details: '',
             total: '',
             file: null,
+            estado: '',
+            active: true
         });
     };
 
@@ -39,7 +44,7 @@ export const ModalNewProduct = ({ isOpen, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!name || !category || !brand || !price || !details || !total || !file) {
+        if (!name || !category || !brand || !price || !details || !total || !file || !estado) {
             Swal.fire({
                 icon: "error",
                 title: "Error al crear el producto!",
@@ -48,6 +53,7 @@ export const ModalNewProduct = ({ isOpen, onClose }) => {
         } else {
             try {
                 // Crear el objeto FormData
+                console.log(formState)
                 const formData = new FormData();
                 formData.append("name", name);
                 formData.append("category", category);
@@ -57,6 +63,9 @@ export const ModalNewProduct = ({ isOpen, onClose }) => {
                 formData.append("total", total);
                 formData.append("file", file);
                 formData.append('active', true)
+                formData.append('estado', estado)
+
+                console.log('FORMSTATE', formState)
                 await axios.post("http://localhost:3000/productos/crearProducto", formData);
                 Swal.fire({
                     icon: "success",
@@ -86,7 +95,26 @@ export const ModalNewProduct = ({ isOpen, onClose }) => {
                 }));
                 setCategorias(categoriaData)
             } catch (error) {
-                console.error('Error fetching administradores:', error);
+                console.error('Error fetching categorias:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/estados/Dos');
+
+                // console.log('RESPONSE',response)
+                const estadoData = response.data.estados.map((cate) => ({
+                    id: cate.id,
+                    ...cate.data,
+                }));
+                setEstados(estadoData)
+            } catch (error) {
+                console.error('Error fetching estados:', error);
             }
         };
 
@@ -152,18 +180,37 @@ export const ModalNewProduct = ({ isOpen, onClose }) => {
                             </div>
                         </div>
 
-                        {/* Cantidad */}
-                        <div>
-                            <Label htmlFor="total" value="Cantidad" />
-                            <TextInput
-                                id="total"
-                                value={total}
-                                type="number"
-                                min={0}
-                                onChange={(e) => setFormState({ ...formState, total: e.target.value })}
-                                required
-                            />
+                        <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5">
+
+                            {/* Cantidad */}
+
+                            <div>
+                                <Label htmlFor="total" value="Cantidad" />
+                                <TextInput
+                                    id="total"
+                                    value={total}
+                                    type="number"
+                                    min={0}
+                                    onChange={(e) => setFormState({ ...formState, total: e.target.value })}
+                                    required
+                                />
+                            </div>
+
+                            {/* Categoría */}
+                            <div>
+                                <Label htmlFor="category" value="Estado del producto" />
+                                <Select id="category" value={estado} onChange={(e) => setFormState({ ...formState, estado: e.target.value })} required>
+                                    <option value=""></option>
+                                    {estados.map((estado) => (
+                                        <option key={estado.id} value={estado.name}>
+                                            {estado.name}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </div>
+
                         </div>
+
 
                         {/* Detalles del producto */}
                         <div>

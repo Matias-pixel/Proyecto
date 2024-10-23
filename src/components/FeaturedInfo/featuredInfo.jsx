@@ -17,7 +17,7 @@ export default function FeaturedInfo() {
       try {
         const response = await axios.get('http://localhost:3000/finanzas');
         setData(response.data.ventas);
-   
+
       } catch (error) {
         console.error('Error fetching ventas:', error);
       }
@@ -35,35 +35,38 @@ export default function FeaturedInfo() {
     })
     .reduce((total, [_, monto]) => total + monto, 0);
 
-    const totalAñoActual = Object.entries(data)
+  const totalAñoActual = Object.entries(data)
     .filter(([fechaVenta, _]) => {
-        const [year] = fechaVenta.split('-').map(Number);
-        return year === currentYear;
+      const [year] = fechaVenta.split('-').map(Number);
+      return year === currentYear;
     })
     .reduce((total, [_, monto]) => total + monto, 0);
 
 
 
   return (
-    <div className="featured">
-      <div className="featuredItem">
-        <span className="featuredTitle text-xl">Ventas</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">${totalMesActual}</span>
-          
+   
+      <div className="featured flex-col sm:flex-row my-4 ">
+        <div className="featuredItem">
+          <span className="featuredTitle text-xl">Ventas</span>
+          <div className="featuredMoneyContainer">
+            <span className="featuredMoney">${totalMesActual}</span>
+
+          </div>
+          <span className="featuredSub">En el año</span>
         </div>
-        <span className="featuredSub">En el año</span>
-      </div>
-      <div className="featuredItem">
-        <span className="featuredTitle">Ventas</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">${totalAñoActual}</span>
-          {/* <span className="featuredMoneyRate">
+        <div className="featuredItem">
+          <span className="featuredTitle">Ventas</span>
+          <div className="featuredMoneyContainer">
+            <span className="featuredMoney">${totalAñoActual}</span>
+            {/* <span className="featuredMoneyRate">
             -1.4 <PiArrowBendRightDownBold className="featuredIcon negative" />
           </span> */}
+          </div>
+          <span className="featuredSub">En el mes</span>
         </div>
-        <span className="featuredSub">En el mes</span>
       </div>
-    </div>
+
+
   );
 }

@@ -153,12 +153,20 @@ export const ListarCategorias = () => {
       <div className="container max-w-full pt-5">
         <p className="text-2xl font-bold">Todas las categorias</p>
 
-        <div className="flex justify-between mt-2">
-          <div>
-            <TextInput className="w-[500px]" id="base" onChange={(e) => setBusqueda(e.target.value)} value={busqueda} type="text" placeholder="Buscar categoria" sizing="md" />
+        <div className="grid gap-4 xl:grid-cols-2 md:grid-cols-1">
+          <div className="w-full sm:w-auto">
+            <TextInput
+              className="w-full sm:w-40 md:w-96"
+              id="base"
+              onChange={(e) => setBusqueda(e.target.value)}
+              value={busqueda}
+              type="text"
+              placeholder="Buscar cliente"
+              sizing="md"
+            />
           </div>
-          <div>
-            <Button onClick={abrirModal} className="text-xl font-bold">+ Agregar categoria</Button>
+          <div className="flex mt-0  xl:justify-end xl:pt-5">
+            <Button onClick={abrirModal} className="text-xl font-bold bg-green-600">+ Agregar categoria</Button>
           </div>
         </div>
 

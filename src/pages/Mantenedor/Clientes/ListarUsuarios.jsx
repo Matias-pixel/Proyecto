@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
-import {  Delete } from '@mui/icons-material';
+import { Delete } from '@mui/icons-material';
 
 import { Button, TextInput } from "flowbite-react"
 
@@ -52,7 +52,7 @@ export const ListarClientes = () => {
             if (result.isConfirmed) {
                 const body = { active: !active }
                 const response = await axios.put(`http://localhost:3000/clientes/deshabilitar/${id}`, body)
-                setGun(gun+1)
+                setGun(gun + 1)
                 if (response.status === 200) {
                     Swal.fire({
                         title: '¡Éxito!',
@@ -157,15 +157,17 @@ export const ListarClientes = () => {
             <div className="container max-w-full pt-5">
                 <p className="text-2xl font-bold">Todos los clientes</p>
                 <div className="flex justify-between mt-2">
-                    <div>
-                        <div className="">
-
-                            <TextInput className="w-[500px]" id="base" onChange={(e) => setBusqueda(e.target.value)} value={busqueda} type="text" placeholder="Buscar cliente" sizing="md" />
-                        </div>
+                    <div className="w-full sm:w-auto">
+                        <TextInput
+                            className="w-full sm:w-40 md:w-96"
+                            id="base"
+                            onChange={(e) => setBusqueda(e.target.value)}
+                            value={busqueda}
+                            type="text"
+                            placeholder="Buscar cliente"
+                            sizing="md"
+                        />
                     </div>
-                    {/* <div>
-                        <Button onClick={() => { console.log('Hola') }} className="text-xl font-bold">+ Agregrar cliente</Button>
-                    </div> */}
                 </div>
 
 

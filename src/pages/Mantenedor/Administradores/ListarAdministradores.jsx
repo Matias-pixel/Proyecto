@@ -148,7 +148,7 @@ export const ListarAdministradores = () => {
             headerName: 'Acciones',
             width: 400,
             renderCell: (params) => {
-                const {id, active} = params.row
+                const { id, active } = params.row
                 return (
                     <div className="flex gap-1">
                         {/* <Button onClick={() => handleEdit(params.row.id)} color="success"> <Edit /> Editar</Button> */}
@@ -172,13 +172,20 @@ export const ListarAdministradores = () => {
                 <div className="flex justify-between mt-2">
                     <div>
 
-                        <div className="">
-
-                            <TextInput className="w-[500px]" id="base" onChange={(e) => setBusqueda(e.target.value)} value={busqueda} type="text" placeholder="Buscar administrador" sizing="md" />
+                        <div className="w-full sm:w-auto">
+                            <TextInput
+                                className="w-full sm:w-40 md:w-96"
+                                id="base"
+                                onChange={(e) => setBusqueda(e.target.value)}
+                                value={busqueda}
+                                type="text"
+                                placeholder="Buscar cliente"
+                                sizing="md"
+                            />
                         </div>
                     </div>
-                    <div>
-                        <Button onClick={() => { abrirModal() }} className="text-xl font-bold">+ Agregrar administrador</Button>
+                    <div >
+                        <Button onClick={() => { abrirModal() }} className="bg-green-600 text-xl font-bold">+ Agregrar administrador</Button>
                     </div>
                 </div>
                 <ModalNewAdministrador isOpen={openModal} onClose={cerrarModal} />

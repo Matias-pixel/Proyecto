@@ -16,6 +16,7 @@ import { VentaFalsa } from "./pages/VentaFalsa";
 import { ListarClientes } from "./pages/Mantenedor/Clientes/ListarUsuarios";
 import { ListarAdministradores } from "./pages/Mantenedor/Administradores/ListarAdministradores";
 import { ListarCategorias } from "./pages/Mantenedor/Categorias/ListarCategorias";
+import { ListarEstados } from "./pages/Mantenedor/Estado/ListarEstados";
 
 const App = () => {
 
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/homeAdmin/verClientes" element={<ListarClientes />} />
           <Route path="/homeAdmin/verAdministradores" element={<ListarAdministradores />} />
           <Route path="/homeAdmin/verCategorias" element={<ListarCategorias />} />
+          <Route path="/homeAdmin/verEstados" element={<ListarEstados />} />
         </Route>
 
 

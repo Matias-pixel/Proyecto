@@ -193,12 +193,20 @@ export const Productos = () => {
 
       <p className="text-2xl font-bold">Todos los productos</p>
 
-      <div className="grid xl:grid-cols-2 md:grid-cols-1">
-        <div>
-          <TextInput className="w-[500px]" id="base" onChange={(e) => setBusqueda(e.target.value)} value={busqueda} type="text" placeholder="Buscar producto por nombre" sizing="md" />
+      <div className="grid gap-4 xl:grid-cols-2 md:grid-cols-1">
+        <div className="w-full sm:w-auto">
+          <TextInput
+            className="w-full sm:w-40 md:w-96"
+            id="base"
+            onChange={(e) => setBusqueda(e.target.value)}
+            value={busqueda}
+            type="text"
+            placeholder="Buscar cliente"
+            sizing="md"
+          />
         </div>
-        <div className="flex xl:justify-end xl:pt-5 ">
-          <Button onClick={() => { abrirModal() }} className="text-xl font-bold">+ Agregrar producto</Button>
+        <div className="flex mt-0  xl:justify-end xl:pt-5 ">
+          <Button onClick={() => { abrirModal() }} className="text-xl bg-green-600 font-bold">+ Agregrar producto</Button>
         </div>
       </div>
 
